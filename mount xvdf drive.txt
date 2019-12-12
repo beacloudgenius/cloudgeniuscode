@@ -1,0 +1,14 @@
+df -H
+lsblk
+sudo file -s /dev/xvdf
+sudo file -s /dev/xvda1
+sudo mkfs -t xfs /dev/xvdf
+sudo file -s /dev/xvdf
+sudo file -s /dev/xvda1
+sudo mkdir /data
+sudo mount /dev/xvdf /data
+cd /data
+df -H
+
+
+https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-using-volumes.html
