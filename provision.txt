@@ -92,19 +92,24 @@ sudo apt remove --yes docker docker-engine docker.io \
     && printf '\nDocker installed successfully\n\n'
 
 printf 'Waiting for Docker to start...\n\n'
+
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh
+bash ~/miniconda.sh -b -p $HOME/miniconda
+echo ". /home/ubuntu/miniconda/etc/profile.d/conda.sh" >>  /home/ubuntu/.bashrc
+
 sleep 3
 
 # Docker Compose
 sudo wget \
         --output-document=/usr/local/bin/docker-compose \
         https://github.com/docker/compose/releases/download/1.25.0/run.sh \
-    && sudo chmod +x /usr/local/bin/docker-compose     
+    && sudo chmod +x /usr/local/bin/docker-compose
     # && sudo wget \
     #     --output-document=/etc/bash_completion.d/docker-compose \
     #     "https://raw.githubusercontent.com/docker/compose/$(docker-compose version --short)/contrib/completion/bash/docker-compose"
 
 sudo usermod -aG docker ubuntu
-newgrp docker 
+newgrp docker
 
 #!/bin/ksh
 
@@ -115,4 +120,6 @@ id
 EONG
 echo "After newgrp"
 
-
+sudo -H -u ubuntu /bin/bash -lc "
+    newgrp docker
+"
