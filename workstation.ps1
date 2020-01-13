@@ -19,14 +19,14 @@ $UserData = [System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBy
 $NewInstanceResponse = New-EC2Instance  -ImageId ami-06d51e91cea0dac8d `
                                         -MinCount 1 `
                                         -MaxCount 1 `
-                                        -KeyName CloudGenius `
-                                        -SecurityGroups CloudGeniusSG `
+                                        -KeyName DoNotUseThisKey-CloudGeniusOnly `
+                                        -SecurityGroups DoNotUseThisSG-CloudGeniusOnly `
                                         -InstanceType t2.micro `
                                         -BlockDeviceMapping $mapping1 `
                                         -UserData $UserData
 
 $Instances = ($NewInstanceResponse.Instances).InstanceId
 $Tags = @( @{key="CreatedBy";value="Cloud Genius®"}, `
-           @{key="Name";value="Cloud Genius Workstation"} )
+           @{key="Name";value="DontMessWith Cloud Genius Workstation"} )
 New-EC2Tag -ResourceId $Instances -Tags $Tags
 ((Get-EC2Instance -Instance $Instances).RunningInstance).Tags
