@@ -19,7 +19,9 @@ Host CloudGenius
   ForwardAgent yes
   User ubuntu
   StrictHostKeyChecking no
-  IdentityFile ./.ssh/CloudGenius
+  IdentityFile ~/.ssh/CloudGenius
+  LocalForward 8080 127.0.0.1:80
+  LocalForward 4000 127.0.0.1:4000
 EOF
 mv -f config ~/.ssh/config
 rm -rf provision.txt
