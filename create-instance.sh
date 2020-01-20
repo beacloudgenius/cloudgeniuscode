@@ -5,7 +5,7 @@ instance_response=$(aws ec2 run-instances \
     --key-name DoNotUseThisKey-CloudGeniusOnly \
     --security-groups DoNotUseThisSG-CloudGeniusOnly \
     --user-data file://provision.txt \
-    --block-device-mappings 'DeviceName=/dev/xvdf,Ebs={VolumeSize=256,VolumeType=gp2,DeleteOnTermination=false,Encrypted=true}' \
+    --block-device-mappings 'DeviceName=/dev/xvdf,Ebs={VolumeSize=30,VolumeType=gp2,DeleteOnTermination=false,Encrypted=true}' \
     --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value="DontMessWith Cloud Genius Workstation"}]' 'ResourceType=volume,Tags=[{Key=Name,Value="Disk for Cloud Genius"}]')
 sleep 60
 instanceId=$(echo -e "$instance_response" |  jq -r '.Instances[] | .InstanceId' | tr -d '"')

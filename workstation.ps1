@@ -5,7 +5,7 @@ Set-AWSCredential -ProfileName AWScreds
 $volume1 = New-Object Amazon.EC2.Model.EbsBlockDevice
 $volume1.DeleteOnTermination = $false
 $volume1.Encrypted = $true
-$volume1.VolumeSize = 256
+$volume1.VolumeSize = 30
 $volume1.VolumeType = 'gp2'
 
 #describe a mapping profile using disk above
