@@ -30,3 +30,26 @@ $Tags = @( @{key="CreatedBy";value="Cloud Genius®"}, `
            @{key="Name";value="Cloud Genius Workstation"} )
 New-EC2Tag -ResourceId $Instances -Tags $Tags
 ((Get-EC2Instance -Instance $Instances).RunningInstance).Tags
+
+if (Test-Path -LiteralPath "~/.ssh" -PathType Leaf) {rm ~/.ssh/config} else {pwd}
+
+Start-Sleep -s 120
+
+if (Test-Path  "~/.ssh") {pwd} else {mkdir ~/.ssh}
+$ggg = "Host " + "CloudGenius" -join ''  > ~/.ssh/config
+$ggg = "  HostName " + ((Get-EC2Instance -Instance $Instances).RunningInstance).PublicIpAddress -join '' >> ~/.ssh/config
+echo "  ForwardAgent yes" >> ~/.ssh/config
+echo "  User ubuntu" >> ~/.ssh/config
+echo "  StrictHostKeyChecking no" >> ~/.ssh/config
+echo "  IdentityFile ~/.ssh/CloudGenius.pem" >> ~/.ssh/config
+echo "  LocalForward 8080 127.0.0.1:80" >> ~/.ssh/config
+echo "  LocalForward 4000 127.0.0.1:4000" >> ~/.ssh/config
+
+$path = "~/.ssh/config"
+(Get-Content $path -Raw).Replace("\`r\`n","\`n") | Set-Content $path -Force
+
+ssh -o "StrictHostKeyChecking no" CloudGenius "curl -s https://s3-us-west-2.amazonaws.com/cloudgeniuscode/mountdisk.sh | bash"
+
+cat ~/.ssh/config
+
+code
