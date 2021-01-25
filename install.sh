@@ -1,7 +1,7 @@
 brew install awscli@1 jq wget
 echo 'export PATH="/usr/local/opt/awscli@1/bin:$PATH"' >> ~/.zshrc
 echo 'export PATH="/usr/local/opt/awscli@1/bin:$PATH"' >> ~/.bashrc
-brew cask install visual-studio-code
+brew install --cask visual-studio-code
 ln -sf "/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code" /usr/local/bin/code
 code --install-extension ms-vscode-remote.remote-ssh
 rm -rf settings.json
