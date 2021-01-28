@@ -24,7 +24,7 @@ Host CloudGenius
   LocalForward 4000 127.0.0.1:4000
 EOF
 mv -f config ~/.ssh/config
-rm -rf provision.txt
+# rm -rf provision.txt
 
 ssh -o "StrictHostKeyChecking no" CloudGenius "curl -s https://s3-us-west-2.amazonaws.com/cloudgeniuscode/mountdisk.sh | bash"
 
