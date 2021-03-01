@@ -126,3 +126,4 @@ sudo -H -u ubuntu /bin/bash -lc "
 "
 
 sudo chown ubuntu:ubuntu /var/run/docker.sock
+sudo chmod 666 /var/run/docker.sock
