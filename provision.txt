@@ -3,11 +3,15 @@
 sudo hostnamectl set-hostname CloudGenius
 
 # terraform
-sudo apt-get install -y wget unzip
-export VER="0.12.17"
-wget https://releases.hashicorp.com/terraform/${VER}/terraform_${VER}_linux_amd64.zip
-unzip terraform_${VER}_linux_amd64.zip
-sudo mv terraform /usr/local/bin/
+sudo apt-get install -y wget unzip htop
+
+curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+sudo apt-get update && sudo apt-get install terraform
+# export VER="0.12.17"
+# wget https://releases.hashicorp.com/terraform/${VER}/terraform_${VER}_linux_amd64.zip
+# unzip terraform_${VER}_linux_amd64.zip
+# sudo mv terraform /usr/local/bin/
 
 # ansible
 sudo apt update -y
@@ -63,8 +67,8 @@ sudo chown -R ubuntu:ubuntu /home/ubuntu/.ssh
 
 
 # databases
-sudo apt-get install -y mysql-server mysql-client libmysqlclient-dev
-sudo apt install -y postgresql postgresql-contrib libpq-dev
+# sudo apt-get install -y mysql-server mysql-client libmysqlclient-dev
+# sudo apt install -y postgresql postgresql-contrib libpq-dev
 
 
 # docker and docker-compose
@@ -100,13 +104,10 @@ echo ". /home/ubuntu/miniconda/etc/profile.d/conda.sh" >>  /home/ubuntu/.bashrc
 sleep 3
 
 # Docker Compose
-sudo wget \
-        --output-document=/usr/local/bin/docker-compose \
-        https://github.com/docker/compose/releases/download/1.25.0/run.sh \
-    && sudo chmod +x /usr/local/bin/docker-compose
-    # && sudo wget \
-    #     --output-document=/etc/bash_completion.d/docker-compose \
-    #     "https://raw.githubusercontent.com/docker/compose/$(docker-compose version --short)/contrib/completion/bash/docker-compose"
+sudo curl -L "https://github.com/docker/compose/releases/download/1.28.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+sudo curl -L https://raw.githubusercontent.com/docker/compose/$(docker-compose version --short)/contrib/completion/bash/docker-compose -o /etc/bash_completion.d/docker-compose
 
 sudo usermod -aG docker ubuntu
 newgrp docker
@@ -123,3 +124,5 @@ echo "After newgrp"
 sudo -H -u ubuntu /bin/bash -lc "
     newgrp docker
 "
+
+sudo chown ubuntu:ubuntu /var/run/docker.sock
