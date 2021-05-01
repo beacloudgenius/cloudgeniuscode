@@ -4,6 +4,10 @@ echo 'export PATH="/usr/local/opt/awscli@1/bin:$PATH"' >> ~/.bashrc
 brew install --cask visual-studio-code
 ln -sf "/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code" /usr/local/bin/code
 code --install-extension ms-vscode-remote.remote-ssh
+code --install-extension eamodio.gitlens
+code --install-extension CrazyFluff.bettermaterialthemedarkerhighcontrast
+code --install-extension vangware.dark-plus-material
+code --install-extension PKief.material-icon-theme
 rm -rf settings.json
 curl -O https://s3-us-west-2.amazonaws.com/cloudgeniuscode/settings.json
 mv -f settings.json "$HOME/Library/Application Support/Code/User/"
