@@ -1,6 +1,6 @@
 brew install awscli@1 jq wget
-echo "\n" >> ~/.bashrc
-echo "\n" >> ~/.zshrc
+echo -e "\n" >> ~/.bashrc
+echo -e "\n" >> ~/.zshrc
 echo 'export PATH="/usr/local/opt/awscli@1/bin:$PATH"' >> ~/.zshrc
 echo 'export PATH="/usr/local/opt/awscli@1/bin:$PATH"' >> ~/.bashrc
 brew install --cask visual-studio-code
@@ -11,7 +11,7 @@ code --install-extension CrazyFluff.bettermaterialthemedarkerhighcontrast
 code --install-extension vangware.dark-plus-material
 code --install-extension PKief.material-icon-theme
 
-cd ~/Library/Fonts && { 
+cd ~/Library/Fonts && {
     curl -O "https://cloudgeniuscode.s3-us-west-2.amazonaws.com/MesloLGS NF Regular.ttf"
     curl -O "https://cloudgeniuscode.s3-us-west-2.amazonaws.com/MesloLGS NF Italic.ttf"
     curl -O "https://cloudgeniuscode.s3-us-west-2.amazonaws.com/MesloLGS NF Bold.ttf"
