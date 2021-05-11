@@ -11,10 +11,7 @@ $env:Path += ";'C:\Program Files\Microsoft VS Code\bin'"
 
 #VSCODE EXTENSIONS
 & 'C:\Program Files\Microsoft VS Code\bin\code' --install-extension ms-vscode-remote.remote-ssh
-& 'C:\Program Files\Microsoft VS Code\bin\code' --install-extension eamodio.gitlens
-& 'C:\Program Files\Microsoft VS Code\bin\code' --install-extension CrazyFluff.bettermaterialthemedarkerhighcontrast
-& 'C:\Program Files\Microsoft VS Code\bin\code' --install-extension vangware.dark-plus-material
-& 'C:\Program Files\Microsoft VS Code\bin\code' --install-extension PKief.material-icon-theme
+echo "remote ssh extension installed"
 
 #FONTS
 if (Test-Path "~/fonts") {Remove-Item -Force -Recurse ~/fonts}

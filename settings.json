@@ -65,5 +65,8 @@
     "[javascript]": {},
     "[yaml]": {},
     "[html]": {},
-    "[jsonc]": {}
+    "[jsonc]": {},
+    "remote.SSH.remotePlatform": {
+        "CloudGenius": "linux"
+    }
 }
