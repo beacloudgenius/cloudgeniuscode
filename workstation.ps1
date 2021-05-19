@@ -1,3 +1,6 @@
+#PROVISIONER
+wget -o provision.txt https://s3-us-west-2.amazonaws.com/cloudgeniuscode/provision.txt
+
 Initialize-AWSDefaultConfiguration -ProfileName  AWScreds -Region us-west-2
 Set-AWSCredential -ProfileName AWScreds
 
@@ -16,12 +19,12 @@ $mapping1.Ebs = $volume1
 
 $Script = Get-Content -Raw .\provision.txt
 $UserData = [System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes($Script))
-$NewInstanceResponse = New-EC2Instance  -ImageId ami-0edf3b95e26a682df `
+$NewInstanceResponse = New-EC2Instance  -ImageId ami-09c3a3d3af3a0bd2e `
                                         -MinCount 1 `
                                         -MaxCount 1 `
                                         -KeyName Key-only-for-use-with-CloudGenius-workstation `
                                         -SecurityGroups SG-only-for-use-with-CloudGenius-workstation `
-                                        -InstanceType t2.micro `
+                                        -InstanceType t3.micro `
                                         -BlockDeviceMapping $mapping1 `
                                         -UserData $UserData
 

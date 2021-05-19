@@ -1,0 +1,129 @@
+#!/bin/bash
+
+sudo hostnamectl set-hostname CloudGenius
+
+# terraform
+sudo apt-get install -y wget unzip htop
+
+curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+sudo apt-get update && sudo apt-get install terraform
+# export VER="0.12.17"
+# wget https://releases.hashicorp.com/terraform/${VER}/terraform_${VER}_linux_amd64.zip
+# unzip terraform_${VER}_linux_amd64.zip
+# sudo mv terraform /usr/local/bin/
+
+# ansible
+sudo apt update -y
+sudo apt install -y software-properties-common
+sudo apt-add-repository --yes --update ppa:ansible/ansible
+sudo apt install -y ansible
+
+# prereq
+
+sudo apt install curl
+curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+sudo apt-get -y update
+sudo apt-get install -y git-core zlib1g-dev build-essential \
+      libssl-dev libreadline-dev libyaml-dev libsqlite3-dev \
+      sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev \
+      software-properties-common libffi-dev nodejs yarn
+
+# ruby via rbenv
+sudo apt install -y rbenv
+sudo apt purge -y libssl-dev && sudo apt -y install libssl1.0-dev
+export ruby_version="2.3.1"
+sudo -H -u ubuntu /bin/bash -lc "
+    cd /home/ubuntu
+    rbenv uninstall -f $ruby_version
+    rbenv install $ruby_version
+    rbenv global $ruby_version
+    echo 'gem: --no-ri --no-rdoc' > ~/.gemrc
+    rm -rf /home/ubuntu/.ssh/id_rsa*
+    ssh-keygen -b 4096 -t rsa -f /home/ubuntu/.ssh/id_rsa -q -N '' -C cloudgenius
+"
+
+echo 'export PATH="/home/ubuntu/.rbenv/bin:$PATH"' >>/home/ubuntu/.bashrc
+echo 'eval "$(rbenv init -)"' >> /home/ubuntu/.bashrc
+sudo chown ubuntu:ubuntu /home/ubuntu/.bashrc
+
+tee -a /home/ubuntu/.ssh/config.example  << END
+Host jumpbox
+  HostName 52.25.136.27
+  ForwardAgent yes
+  StrictHostKeyChecking ask
+  IdentityFile /home/ubuntu/.ssh/id_rsa
+  User ec2-user
+
+Host 10.0.10.251
+  ProxyCommand ssh -q -W %h:%p jumpbox
+  ForwardAgent yes
+  IdentityFile /home/ubuntu/.ssh/id_rsa
+  User ubuntu
+END
+sudo chown -R ubuntu:ubuntu /home/ubuntu/.ssh
+
+
+# databases
+# sudo apt-get install -y mysql-server mysql-client libmysqlclient-dev
+# sudo apt install -y postgresql postgresql-contrib libpq-dev
+
+
+# docker and docker-compose
+
+#!/bin/sh
+
+set -eu
+
+# Docker
+sudo apt remove --yes docker docker-engine docker.io \
+    && sudo apt update \
+    && sudo apt --yes --no-install-recommends install \
+        apt-transport-https \
+        ca-certificates \
+    && wget --quiet --output-document=- https://download.docker.com/linux/ubuntu/gpg \
+        | sudo apt-key add - \
+    && sudo add-apt-repository \
+        "deb [arch=$(dpkg --print-architecture)] https://download.docker.com/linux/ubuntu \
+        $(lsb_release --codename --short) \
+        stable" \
+    && sudo apt update \
+    && sudo apt --yes --no-install-recommends install docker-ce \
+    && sudo usermod --append --groups docker "$USER" \
+    && sudo systemctl enable docker \
+    && printf '\nDocker installed successfully\n\n'
+
+printf 'Waiting for Docker to start...\n\n'
+
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh
+bash ~/miniconda.sh -b -p $HOME/miniconda
+echo ". /home/ubuntu/miniconda/etc/profile.d/conda.sh" >>  /home/ubuntu/.bashrc
+
+sleep 3
+
+# Docker Compose
+sudo curl -L "https://github.com/docker/compose/releases/download/1.28.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+sudo curl -L https://raw.githubusercontent.com/docker/compose/$(docker-compose version --short)/contrib/completion/bash/docker-compose -o /etc/bash_completion.d/docker-compose
+
+sudo usermod -aG docker ubuntu
+newgrp docker
+
+#!/bin/ksh
+
+echo "Before newgrp"
+/usr/bin/newgrp docker <<EONG
+echo "hello from within newgrp"
+id
+EONG
+echo "After newgrp"
+
+sudo -H -u ubuntu /bin/bash -lc "
+    newgrp docker
+"
+
+sudo chown ubuntu:ubuntu /var/run/docker.sock
+sudo chmod 666 /var/run/docker.sock

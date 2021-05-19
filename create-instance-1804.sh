@@ -1,10 +1,7 @@
-rm -rf provision.txt
-curl -O https://s3-us-west-2.amazonaws.com/cloudgeniuscode/provision.txt
-
 instance_response=$(aws ec2 run-instances \
-    --image-id ami-09c3a3d3af3a0bd2e \
+    --image-id ami-0edf3b95e26a682df \
     --count 1 \
-    --instance-type t3.medium \
+    --instance-type t2.micro \
     --key-name Key-only-for-use-with-CloudGenius-workstation \
     --security-groups SG-only-for-use-with-CloudGenius-workstation \
     --user-data file://provision.txt \

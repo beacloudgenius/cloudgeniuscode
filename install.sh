@@ -10,6 +10,12 @@ code --install-extension eamodio.gitlens
 code --install-extension CrazyFluff.bettermaterialthemedarkerhighcontrast
 code --install-extension vangware.dark-plus-material
 code --install-extension PKief.material-icon-theme
+code --install-extension aaron-bond.better-comments
+code --install-extension coenraads.bracket-pair-colorizer-2
+code --install-extension oderwat.indent-rainbow
+code --install-extension christian-kohler.path-intellisense
+code --install-extension ms-vscode-remote.remote-ssh-edit
+code --install-extension vscode-icons-team.vscode-icons
 
 cd ~/Library/Fonts && {
     rm -rf MesloLGS*.ttf
