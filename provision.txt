@@ -30,7 +30,7 @@ sudo chown -R ubuntu:ubuntu /home/ubuntu/.ssh
 
 # prereq
 
-sudo apt -y install wget unzip htop git curl libssl-dev libreadline-dev zlib1g-dev autoconf bison build-essential libyaml-dev libreadline-dev libncurses5-dev libffi-dev libgdbm-dev
+sudo apt -y install wget unzip htop git curl libssl-dev libreadline-dev zlib1g-dev autoconf bison build-essential libyaml-dev libreadline-dev libncurses5-dev libffi-dev libgdbm-dev python3-pip
 
 # terraform
 
@@ -83,5 +83,5 @@ sudo chown -R ubuntu:ubuntu /home/ubuntu/.rbenv
 
 sudo -H -u ubuntu /bin/bash -lc "
     cd /home/ubuntu
-    echo 'gem: --no-document' >> /home/ubuntu/.gemrc
+    echo ': --no-documentgem' >> /home/ubuntu/.gemrc
 "
