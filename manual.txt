@@ -1,6 +1,6 @@
 # Manually install ruby
 
-export ruby_version="3.0.1"
+export ruby_version="3.0.2"
 rbenv uninstall -f $ruby_version
 rbenv install $ruby_version
 rbenv global $ruby_version
