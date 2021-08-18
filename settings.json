@@ -47,7 +47,7 @@
 	"window.zoomLevel": 1,
 	"explorer.confirmDelete": true,
 	"explorer.confirmDragAndDrop": true,
-	"terminal.integrated.confirmOnExit": false,
+	"terminal.integrated.confirmOnExit": "hasChildProcesses",
 	"git.confirmSync": false,
 	"gitlens.views.repositories.files.layout": "tree",
 	"gitlens.showWelcomeOnInstall": false,
