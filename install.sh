@@ -1,8 +1,16 @@
 brew install awscli@1 jq wget
-# echo -e "\n" >> ~/.bashrc
-# echo -e "\n" >> ~/.zshrc
-grep -qxF 'export PATH="/usr/local/opt/awscli@1/bin:$PATH"' ~/.zshrc  || echo '\nexport PATH="/usr/local/opt/awscli@1/bin:$PATH"' >> ~/.zshrc
-grep -qxF 'export PATH="/usr/local/opt/awscli@1/bin:$PATH"' ~/.bashrc || echo '\nexport PATH="/usr/local/opt/awscli@1/bin:$PATH"' >> ~/.bashrc
+
+if [[ `uname -m` == 'arm64' ]]
+then
+  echo M1 CPU detected - Homebrew preferred prefix /opt/homebrew for Apple Silicon
+  grep -qxF 'export PATH="/opt/homebrew/opt/awscli@1/bin:$PATH"' ~/.zshrc  || echo -e "\n" >> ~/.zshrc && echo 'export PATH="/opt/homebrew/opt/awscli@1/bin:$PATH"' >> ~/.zshrc
+  grep -qxF 'export PATH="/opt/homebrew/opt/awscli@1/bin:$PATH"' ~/.bashrc || echo -e "\n" >> ~/.bashrc && echo 'export PATH="/opt/homebrew/opt/awscli@1/bin:$PATH"' >> ~/.bashrc
+else
+  echo Intel CPU detected - Homebrew preferred prefix /usr/local for macOS Intel
+  grep -qxF 'export PATH="/usr/local/opt/awscli@1/bin:$PATH"' ~/.zshrc  || echo -e "\n" >> ~/.zshrc && echo 'export PATH="/usr/local/opt/awscli@1/bin:$PATH"' >> ~/.zshrc
+  grep -qxF 'export PATH="/usr/local/opt/awscli@1/bin:$PATH"' ~/.bashrc || echo -e "\n" >> ~/.bashrc && echo 'export PATH="/usr/local/opt/awscli@1/bin:$PATH"' >> ~/.bashrc
+fi
+
 brew install --cask visual-studio-code
 ln -sf "/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code" /usr/local/bin/code
 code --install-extension ms-vscode-remote.remote-ssh
