@@ -1,4 +1,5 @@
-brew install awscli@1 jq wget
+brew install awscli@1 jq wget python
+brew link python@3.9
 
 if [[ `uname -m` == 'arm64' ]]
 then
