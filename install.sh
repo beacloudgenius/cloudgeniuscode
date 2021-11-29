@@ -13,7 +13,16 @@ else
 fi
 
 brew install --cask visual-studio-code
-ln -sf "/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code" /usr/local/bin/code
+
+if [[ `uname -m` == 'arm64' ]]
+then
+  echo M1 CPU detected - Homebrew preferred prefix /opt/homebrew for Apple Silicon
+  ln -sf "/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code" /opt/homebrew/bin/code
+else
+  echo Intel CPU detected - Homebrew preferred prefix /usr/local for macOS Intel
+  ln -sf "/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code" /usr/local/bin/code
+fi
+
 code --install-extension ms-vscode-remote.remote-ssh
 code --install-extension eamodio.gitlens
 code --install-extension CrazyFluff.bettermaterialthemedarkerhighcontrast
