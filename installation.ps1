@@ -29,7 +29,7 @@ if (Test-Path "~/AppData/Roaming/Code/User") {pwd} else {mkdir "~/AppData/Roamin
 wget -o ~/AppData/Roaming/Code/User/settings.json https://s3-us-west-2.amazonaws.com/cloudgeniuscode/settings.json
 
 choco install git -Force --no-progress
-choco install miniconda3 -Force --no-progress
+choco install miniconda3 -Force --no-progress --params="'/AddToPath:1 /InstallationType:AllUsers /RegisterPython:1'"
 Get-WindowsCapability -Online | ? Name -like 'OpenSSH*'
 Add-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0
 # choco install winscp -Force
