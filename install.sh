@@ -52,6 +52,10 @@ if [[ `uname -m` == 'arm64' ]]
 then
   echo M1 CPU detected - Homebrew preferred prefix /opt/homebrew for Apple Silicon
   brew install miniforge
+  conda init zsh
+  conda config --set auto_activate_base false
+  conda update -n base -c conda-forge conda -y
+  conda update --all -y
 else
   echo Intel CPU detected - Homebrew preferred prefix /usr/local for macOS Intel
   rm -rf $HOME/miniconda ~/miniconda.sh
