@@ -5,6 +5,7 @@ Import-Module AWSPowerShell.NetCore
 Get-AWSPowerShellVersion
 iwr https://chocolatey.org/install.ps1 -UseBasicParsing | iex
 choco feature enable -n allowGlobalConfirmation
+choco uninstall vscode
 choco install vscode -Force
 Remove-Item C:\Users\*\Desktop\"Visual Studio Code".lnk -Force
 setx path "%path%;'C:\Program Files\Microsoft VS Code\bin'"
