@@ -30,6 +30,7 @@ wget -o ~/AppData/Roaming/Code/User/settings.json https://s3-us-west-2.amazonaws
 
 choco install git -Force --no-progress
 choco install miniconda3 -Force --no-progress --params="'/AddToPath:1 /InstallationType:AllUsers /RegisterPython:1'"
+Import-Module "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
 refreshenv
 # source $HOME/miniconda3/bin/activate
 conda init powershell
