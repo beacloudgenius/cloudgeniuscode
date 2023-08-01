@@ -24,7 +24,7 @@ $NewInstanceResponse = New-EC2Instance  -ImageId ami-0964546d3da97e3ab `
                                         -MaxCount 1 `
                                         -KeyName CloudGenius-key `
                                         -SecurityGroups CloudGenius-sg `
-                                        -InstanceType t3.micro `
+                                        -InstanceType t2.micro `
                                         -BlockDeviceMapping $mapping1 `
                                         -UserData $UserData
 
