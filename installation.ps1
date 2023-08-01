@@ -5,6 +5,7 @@ Import-Module AWSPowerShell.NetCore
 Get-AWSPowerShellVersion
 iwr https://chocolatey.org/install.ps1 -UseBasicParsing | iex
 choco feature enable -n allowGlobalConfirmation
+choco uninstall vscode -Force
 choco install vscode -Force
 Remove-Item C:\Users\*\Desktop\"Visual Studio Code".lnk -Force
 setx path "%path%;'C:\Program Files\Microsoft VS Code\bin'"
@@ -29,14 +30,18 @@ if (Test-Path "~/AppData/Roaming/Code/User") {pwd} else {mkdir "~/AppData/Roamin
 wget -o ~/AppData/Roaming/Code/User/settings.json https://s3-us-west-2.amazonaws.com/cloudgeniuscode/settings.json
 
 choco install git -Force --no-progress
-choco install miniconda3 -Force --no-progress --params="'/AddToPath:1 /InstallationType:AllUsers /RegisterPython:1'"
-refreshenv
-# source $HOME/miniconda3/bin/activate
-conda init powershell
-conda config --set auto_activate_base false
-conda update -n base -c defaults conda -y
-conda update --all -y
 Get-WindowsCapability -Online | ? Name -like 'OpenSSH*'
 Add-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0
 # choco install winscp -Force
 # Remove-Item C:\Users\*\Desktop\WinSCP.lnk -Force
+
+choco install miniconda3 -Force --no-progress --params="'/AddToPath:1 /InstallationType:AllUsers /RegisterPython:1'"
+
+# source $HOME/miniconda3/bin/activate
+
+powershell.exe -ExecutionPolicy ByPass -NoExit -Command "& 'C:\tools\miniconda3\shell\condabin\conda-hook.ps1' ; conda activate 'C:\tools\miniconda3' "
+
+conda init powershell
+conda config --set auto_activate_base false
+conda update -n base -c defaults conda -y
+conda update --all -y
