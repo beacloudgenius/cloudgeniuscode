@@ -3,7 +3,7 @@ brew link python@3.10
 
 if [[ `uname -m` == 'arm64' ]]
 then
-  echo M1 CPU detected - Homebrew preferred prefix /opt/homebrew for Apple Silicon
+  echo Apple Silicon detected - Homebrew preferred prefix /opt/homebrew for Apple Silicon
   grep -qxF 'export PATH="/opt/homebrew/opt/awscli@1/bin:$PATH"' ~/.zshrc  || (echo -e "\n" >> ~/.zshrc && echo 'export PATH="/opt/homebrew/opt/awscli@1/bin:$PATH"' >> ~/.zshrc)
   grep -qxF 'export PATH="/opt/homebrew/opt/awscli@1/bin:$PATH"' ~/.bashrc || (echo -e "\n" >> ~/.bashrc && echo 'export PATH="/opt/homebrew/opt/awscli@1/bin:$PATH"' >> ~/.bashrc)
 else
@@ -16,7 +16,7 @@ brew install --cask visual-studio-code
 
 if [[ `uname -m` == 'arm64' ]]
 then
-  echo M1 CPU detected - Homebrew preferred prefix /opt/homebrew for Apple Silicon
+  echo Apple Silicon detected - Homebrew preferred prefix /opt/homebrew for Apple Silicon
   ln -sf "/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code" /opt/homebrew/bin/code
 else
   echo Intel CPU detected - Homebrew preferred prefix /usr/local for macOS Intel
@@ -50,7 +50,7 @@ mv -f settings.json "$HOME/Library/Application Support/Code/User/"
 
 if [[ `uname -m` == 'arm64' ]]
 then
-  echo M1 CPU detected - Homebrew preferred prefix /opt/homebrew for Apple Silicon
+  echo Apple Silicon detected - Homebrew preferred prefix /opt/homebrew for Apple Silicon
   brew install miniforge
   conda init zsh
   conda config --set auto_activate_base false
