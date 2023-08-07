@@ -15,6 +15,7 @@ instanceId=$(echo -e "$instance_response" |  jq -r '.Instances[] | .InstanceId' 
 PublicIpAddress=$(aws ec2 describe-instances \
     --instance-id $instanceId | jq -r '.Reservations[] | .Instances[] | .PublicIpAddress' | tr -d '"')
 rm -rf config
+sed '/# Created on/,$d' ~/.ssh/config
 cat <<EOF >config
 # Created on $(date)
 Host CloudGenius
@@ -26,7 +27,8 @@ Host CloudGenius
   LocalForward 8080 127.0.0.1:80
   LocalForward 4000 127.0.0.1:4000
 EOF
-mv -f config ~/.ssh/config
+cat config >> ~/.ssh/config
+rm -rf config
 # rm -rf provision.txt
 
 # ssh -o "StrictHostKeyChecking no" CloudGenius "curl -s https://s3-us-west-2.amazonaws.com/cloudgeniuscode/mountdisk.sh | bash"
