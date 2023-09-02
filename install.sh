@@ -43,10 +43,11 @@ cd ~/Library/Fonts && {
     wget "https://cloudgeniuscode.s3-us-west-2.amazonaws.com/MesloLGS NF Bold Italic.ttf"
     cd -; }
 
-rm -rf settings.json
-curl -O https://s3-us-west-2.amazonaws.com/cloudgeniuscode/settings.json
-mv -f settings.json "$HOME/Library/Application Support/Code/User/"
-
+cd "$HOME/Library/Application Support/Code/User/" && {
+    mv settings.json settings.json.bak
+	echo settings.json backup file created
+    curl -O https://s3-us-west-2.amazonaws.com/cloudgeniuscode/settings.json
+    cd -; }
 
 if [[ `uname -m` == 'arm64' ]]
 then
