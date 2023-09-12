@@ -4,12 +4,12 @@ brew link python@3.11
 if [[ `uname -m` == 'arm64' ]]
 then
   echo Apple Silicon detected - Homebrew preferred prefix /opt/homebrew for Apple Silicon
-  grep -qxF 'export PATH="/opt/homebrew/opt/awscli@1/bin:$PATH"' ~/.zshrc  || (echo -e "\n" >> ~/.zshrc && echo 'export PATH="/opt/homebrew/opt/awscli@1/bin:$PATH"' >> ~/.zshrc)
-  grep -qxF 'export PATH="/opt/homebrew/opt/awscli@1/bin:$PATH"' ~/.bashrc || (echo -e "\n" >> ~/.bashrc && echo 'export PATH="/opt/homebrew/opt/awscli@1/bin:$PATH"' >> ~/.bashrc)
+  grep -qxF '  export PATH="/opt/homebrew/opt/awscli@1/bin:$PATH"' ~/.zshrc  || (echo -e "\n" >> ~/.zshrc && echo 'export PATH="/opt/homebrew/opt/awscli@1/bin:$PATH"' >> ~/.zshrc)
+  grep -qxF '  export PATH="/opt/homebrew/opt/awscli@1/bin:$PATH"' ~/.bashrc || (echo -e "\n" >> ~/.bashrc && echo 'export PATH="/opt/homebrew/opt/awscli@1/bin:$PATH"' >> ~/.bashrc)
 else
   echo Intel CPU detected - Homebrew preferred prefix /usr/local for macOS Intel
-  grep -qxF 'export PATH="/usr/local/opt/awscli@1/bin:$PATH"' ~/.zshrc  || (echo -e "\n" >> ~/.zshrc && echo 'export PATH="/usr/local/opt/awscli@1/bin:$PATH"' >> ~/.zshrc)
-  grep -qxF 'export PATH="/usr/local/opt/awscli@1/bin:$PATH"' ~/.bashrc || (echo -e "\n" >> ~/.bashrc && echo 'export PATH="/usr/local/opt/awscli@1/bin:$PATH"' >> ~/.bashrc)
+  grep -qxF '  export PATH="/usr/local/opt/awscli@1/bin:$PATH"' ~/.zshrc  || (echo -e "\n" >> ~/.zshrc && echo 'export PATH="/usr/local/opt/awscli@1/bin:$PATH"' >> ~/.zshrc)
+  grep -qxF '  export PATH="/usr/local/opt/awscli@1/bin:$PATH"' ~/.bashrc || (echo -e "\n" >> ~/.bashrc && echo 'export PATH="/usr/local/opt/awscli@1/bin:$PATH"' >> ~/.bashrc)
 fi
 
 brew install --cask visual-studio-code
