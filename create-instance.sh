@@ -15,7 +15,10 @@ instanceId=$(echo -e "$instance_response" |  jq -r '.Instances[] | .InstanceId' 
 PublicIpAddress=$(aws ec2 describe-instances \
     --instance-id $instanceId | jq -r '.Reservations[] | .Instances[] | .PublicIpAddress' | tr -d '"')
 rm -rf config
+brew install gsed
+gsed -i '/# BOF CloudGenius/,/# EOF CloudGenius/d' ~/.ssh/config
 cat <<EOF >config
+# BOF CloudGenius
 # Created on $(date)
 Host CloudGenius
   HostName $PublicIpAddress
@@ -25,8 +28,10 @@ Host CloudGenius
   IdentityFile ~/.ssh/CloudGenius
   LocalForward 8080 127.0.0.1:80
   LocalForward 4000 127.0.0.1:4000
+# EOF CloudGenius
 EOF
-mv -f config ~/.ssh/config
+cat config >> ~/.ssh/config
+rm -rf config
 # rm -rf provision.txt
 
 # ssh -o "StrictHostKeyChecking no" CloudGenius "curl -s https://s3-us-west-2.amazonaws.com/cloudgeniuscode/mountdisk.sh | bash"
