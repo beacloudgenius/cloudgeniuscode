@@ -24,7 +24,7 @@
 	"editor.formatOnType": true,
 	"editor.formatOnSave": true,
 	"editor.formatOnPaste": true,
-	"editor.tabSize": 4,
+	"editor.tabSize": 2,
 	"editor.insertSpaces": false,
 	"breadcrumbs.symbolPath": "last",
 	"editor.letterSpacing": 0,
@@ -48,9 +48,6 @@
 	"explorer.confirmDragAndDrop": true,
 	"terminal.integrated.confirmOnExit": "hasChildProcesses",
 	"git.confirmSync": false,
-	"gitlens.views.repositories.files.layout": "tree",
-	"gitlens.showWelcomeOnInstall": false,
-	"gitlens.showWhatsNewAfterUpgrades": false,
 	"files.trimTrailingWhitespace": true,
 	"files.insertFinalNewline": true,
 	"files.trimFinalNewlines": true,
@@ -69,5 +66,8 @@
 	"remote.SSH.remotePlatform": {
 		"CloudGenius": "linux"
 	},
-	"editor.inlineSuggest.enabled": true
+	"editor.inlineSuggest.enabled": true,
+    "emmet.includeLanguages": {
+        "javascript": "javascriptreact"
+    }
 }
