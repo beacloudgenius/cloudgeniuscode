@@ -26,6 +26,7 @@ fi
 code --install-extension ms-vscode-remote.remote-ssh
 # code --install-extension eamodio.gitlens
 code --install-extension CrazyFluff.bettermaterialthemedarkerhighcontrast
+code --install-extension hiteshchoudharycode.chai-theme
 code --install-extension vangware.dark-plus-material
 code --install-extension PKief.material-icon-theme
 code --install-extension aaron-bond.better-comments
