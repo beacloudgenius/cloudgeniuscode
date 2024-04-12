@@ -57,10 +57,12 @@
   "extensions.ignoreRecommendations": true,
   "extensions.autoUpdate": false,
   "[python]": {
-		"editor.defaultFormatter": "ms-python.black-formatter"
-	},
+    "editor.defaultFormatter": "ms-python.black-formatter"
+  },
   "[json]": {},
-  "[javascript]": {},
+  "[javascript]": {
+    "editor.defaultformatter": "esbenp.prettier-vscode"
+  },
   "[yaml]": {},
   "[html]": {
     "editor.defaultFormatter": "vscode.html-language-features"
@@ -73,6 +75,6 @@
   "emmet.includeLanguages": {
     "javascript": "javascriptreact"
   },
-  "editor.defaultFormatter": "vscode.html-language-features",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "workbench.settings.applyToAllProfiles": []
 }
