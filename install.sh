@@ -35,6 +35,7 @@ code --install-extension oderwat.indent-rainbow
 code --install-extension christian-kohler.path-intellisense
 code --install-extension ms-vscode-remote.remote-ssh-edit
 code --install-extension vscode-icons-team.vscode-icons
+code --install-extension ms-python.black-formatter
 
 cd ~/Library/Fonts && {
     rm -rf MesloLGS*.ttf

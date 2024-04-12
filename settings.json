@@ -56,11 +56,15 @@
   "breadcrumbs.enabled": false,
   "extensions.ignoreRecommendations": true,
   "extensions.autoUpdate": false,
-  "[python]": {},
+  "[python]": {
+		"editor.defaultFormatter": "ms-python.black-formatter"
+	},
   "[json]": {},
   "[javascript]": {},
   "[yaml]": {},
-  "[html]": {},
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
   "[jsonc]": {},
   "remote.SSH.remotePlatform": {
     "CloudGenius": "linux"
@@ -69,6 +73,6 @@
   "emmet.includeLanguages": {
     "javascript": "javascriptreact"
   },
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.defaultFormatter": "vscode.html-language-features",
   "workbench.settings.applyToAllProfiles": []
 }
