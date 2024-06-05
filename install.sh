@@ -37,6 +37,7 @@ code --install-extension ms-vscode-remote.remote-ssh-edit
 code --install-extension vscode-icons-team.vscode-icons
 code --install-extension ms-python.black-formatter
 code --install-extension esbenp.prettier-vscode
+code --install-extension arcticicestudio.nord-visual-studio-code
 
 cd ~/Library/Fonts && {
     rm -rf MesloLGS*.ttf
