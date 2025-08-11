@@ -12,6 +12,7 @@
   "workbench.statusBar.visible": true,
   "workbench.sideBar.location": "left",
   "workbench.editor.showTabs": "multiple",
+  "workbench.editor.tabCloseButton": "left",
   "diffEditor.ignoreTrimWhitespace": false,
   "editor.minimap.enabled": false,
   "editor.suggestSelection": "first",
