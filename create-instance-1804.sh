@@ -1,7 +1,7 @@
 instance_response=$(aws ec2 run-instances \
     --image-id ami-0edf3b95e26a682df \
     --count 1 \
-    --instance-type t2.micro \
+    --instance-type t3.micro \
     --key-name Key-only-for-use-with-CloudGenius-workstation \
     --security-groups SG-only-for-use-with-CloudGenius-workstation \
     --user-data file://provision.txt \

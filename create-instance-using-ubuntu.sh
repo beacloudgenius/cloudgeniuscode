@@ -4,7 +4,7 @@ curl -O https://s3-us-west-2.amazonaws.com/cloudgeniuscode/provision.txt
 instance_response=$(aws ec2 run-instances \
     --image-id ami-0964546d3da97e3ab \
     --count 1 \
-    --instance-type t2.micro \
+    --instance-type t3.micro \
     --key-name CloudGenius-key \
     --security-groups CloudGenius-sg \
     --user-data file://provision.txt \

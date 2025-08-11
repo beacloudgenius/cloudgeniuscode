@@ -157,7 +157,7 @@
         "DisableApiTermination": "false",
         "InstanceInitiatedShutdownBehavior": "stop",
         "ImageId": "ami-005bdb005fb00e791",
-        "InstanceType": "t2.micro",
+        "InstanceType": "t3.micro",
         "KeyName": "bootcamp",
         "Monitoring": "false",
         "Tags": [
